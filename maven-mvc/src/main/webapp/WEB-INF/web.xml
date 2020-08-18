@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns="http://java.sun.com/xml/ns/javaee"
+	xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd"
+	version="2.5">
+	<display-name>spring-mvc</display-name>
+	<welcome-file-list>
+		<welcome-file>index.html</welcome-file>
+		<welcome-file>index.htm</welcome-file>
+		<welcome-file>index.jsp</welcome-file>
+		<welcome-file>default.html</welcome-file>
+		<welcome-file>default.htm</welcome-file>
+		<welcome-file>default.jsp</welcome-file>
+	</welcome-file-list>
+
+    <!-- To use Spring MVC, we need to configure DispatcherServlet class in the web.xml file
+          This servlet plays the role of Front Controller in Spring MVC
+          Any request submitted by the client will be routed through DispatcherServlet in our application
+          This Servlet will automatically load the IoC container provided by Spring,
+          so that means we don't need to write this code anymore:
+                  ApplicationContext ctx = new ClassPathXmlApplicationContext("spring-config.xml");
+          we just need to provide location and name of the xml file below as an init-param
+            -->
+
+
+	<servlet>
+		<servlet-name>
+			HelloWeb
+		</servlet-name>
+			<servlet-class>
+				org.springframework.web.servlet.DispatcherServlet
+			</servlet-class>
+				<init-param>
+					<param-name>contextConfigLocation</param-name>
+					<param-value>/WEB-INF/spring-config.xml</param-value>
+				</init-param>
+				<load-on-startup>1</load-on-startup>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>HelloWeb</servlet-name>
+		<url-pattern>*.req</url-pattern>
+		<url-pattern>*.lti</url-pattern>
+	</servlet-mapping>
+
+</web-app>
